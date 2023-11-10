@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { initTeams } from "../../commonData";
 import styled from "styled-components";
 
-const MainFormInput = ({ section, teamCommentValue }) => {
+const MainFormInput = ({ section, teamCommentValue, selected }) => {
   return (
     <StDiv>
-      <label>{section.text}</label>
+      <StLabel selected={selected}>{section.text}</StLabel>
       <StInput value={teamCommentValue} onChange={section.changeHandler} />
     </StDiv>
   );
@@ -22,6 +23,11 @@ const StInput = styled.input`
 `;
 
 const StDiv = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+`;
+
+const StLabel = styled.label`
+  font-weight: bold;
+  color: ${(props) => props.theme.mainColor[initTeams[props.selected].team]};
 `;
 export default MainFormInput;

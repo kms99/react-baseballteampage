@@ -45,7 +45,7 @@ const Main = ({ selectTeam, setSelectTeam }) => {
         onGetCommentHandler={getCommentHandler}
       />
 
-      <StCommentDiv>
+      <StCommentDiv selected={selectTeam}>
         <h2>
           {initTeams[selectTeam].text}팀에 총 ({filteredComments.length})개의
           코멘트가 있습니다.
@@ -71,6 +71,16 @@ const StCommentDiv = styled.div`
   border-radius: 15px;
   padding: 1rem;
   margin-top: 1rem;
+  max-height: 50rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) =>
+      props.theme.mainColor[initTeams[props.selected].team]};
+    border-radius: 10px; /* 스크롤바 둥근 테두리 */
+  }
   & > h2 {
     margin: 1rem 0 2rem 0;
     text-align: center;

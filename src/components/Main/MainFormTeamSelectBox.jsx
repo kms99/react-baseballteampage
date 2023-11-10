@@ -17,7 +17,7 @@ const MainFormTeamSelectBox = ({ selectTeam, setSelectTeam }) => {
 
   return (
     <>
-      <div>팀 선택</div>
+      <StSelectLabelDiv selected={selectTeam}>팀 선택</StSelectLabelDiv>
       <StSelect value={selectTeam} onChange={commentSelectTeamHandler}>
         {teamOption}
       </StSelect>
@@ -34,7 +34,12 @@ const StSelect = styled.select`
   background: rgba(0, 0, 0, 0.5);
   color: white;
   border: 1px solid white;
-  margin: 0.5rem 0 1rem 0;
+  margin: 0.5rem 0 0.5rem 0;
+`;
+
+const StSelectLabelDiv = styled.div`
+  font-weight: bold;
+  color: ${(props) => props.theme.mainColor[initTeams[props.selected].team]};
 `;
 
 export default MainFormTeamSelectBox;

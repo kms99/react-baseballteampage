@@ -12,7 +12,7 @@ const StBtn = styled.button`
     props.value === props.selected
       ? props.theme.subColor[initTeams[props.value].team]
       : "white"};
-  border: 1px solid
+  border: 2px solid
     ${(props) => (props.value === props.selected ? "black" : "white")};
   padding: 0.5rem 1rem;
   border-radius: 10px;

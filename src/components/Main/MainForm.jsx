@@ -16,9 +16,24 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
   // form 입력 값 저장 state
   const [inputData, setInputData] = useState(initInputData);
 
+  // 팀변경시 input 값 초기화
+  useEffect(() => {
+    setInputData(initInputData);
+  }, [selectTeam]);
+
   //   form submit 이벤트
   const teamCommentSubmitHandler = (e) => {
     e.preventDefault();
+
+    // Validation Check
+    if (!inputData.user) {
+      alert("닉네임을 입력하세요.");
+      return;
+    }
+    if (!inputData.comment) {
+      alert("내용을 입력하세요.");
+      return;
+    }
 
     // 부모 컴포넌트에 건내줄 새로운 배열
     const newComment = {
@@ -28,6 +43,8 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
       date: new Date(),
     };
 
+    // input 값 초기화
+    setInputData(initInputData);
     // 부모 컴포넌트의 함수를 이용한 값 전달
     onGetCommentHandler(newComment);
   };
@@ -63,6 +80,7 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
         key={section.key}
         section={section}
         teamCommentValue={inputData[section.key]}
+        selected={selectTeam}
       />
     );
   });
@@ -76,8 +94,9 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
           setSelectTeam={setSelectTeam}
         />
         {formInputMapping}
+
+        <MainFormButton selected={selectTeam}>작성하기</MainFormButton>
       </div>
-      <MainFormButton>입력</MainFormButton>
     </StForm>
   );
 };
