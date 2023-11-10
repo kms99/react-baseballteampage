@@ -19,10 +19,6 @@ const StWrapper = styled.div`
 `;
 function App() {
   const [selectTeam, setSelectTeam] = useState(0);
-
-  useEffect(() => {
-    console.log(selectTeam);
-  }, [selectTeam]);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />

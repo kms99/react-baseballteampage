@@ -3,9 +3,11 @@ import { initTeams } from "../../commonData";
 import MainForm from "./MainForm";
 import styled from "styled-components";
 import MainCard from "./MainCard";
+import dummy from "../../db/data.json";
 
 const Main = ({ selectTeam, setSelectTeam }) => {
-  const [allComment, setAllComment] = useState([]);
+  // console.log(dummy[0].date.getDate());
+  const [allComment, setAllComment] = useState(dummy);
 
   const getCommentHandler = (comment) => {
     setAllComment((prev) => [comment, ...prev]);
@@ -32,9 +34,6 @@ const Main = ({ selectTeam, setSelectTeam }) => {
       </ul>
     </>
   );
-  useEffect(() => {
-    console.log(allComment);
-  }, [allComment]);
 
   if (filteredComments.length === 0)
     currentTeamComments = (

@@ -33,27 +33,13 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
   const teamCommentSubmitHandler = (e) => {
     e.preventDefault();
 
-    // Validation Check
-    // if (!inputData.user) {
-    //   alert("닉네임을 입력하세요.");
-    //   return;
-    // }else if (inputData.user.length>20){
-
-    // }
-
-    // if (!inputData.comment) {
-    //   alert("내용을 입력하세요.");
-    //   return;
-    // }else if (inputData.user.length>100){
-
-    // }
-
     // 부모 컴포넌트에 건내줄 새로운 배열
     const newComment = {
       ...inputData,
       team: initTeams[selectTeam].text,
       id: uuidv4(),
       date: new Date(),
+      avatar: "image/avatar.png",
     };
 
     // input 값 초기화
