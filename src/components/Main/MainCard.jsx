@@ -52,12 +52,19 @@ const StUserNameH2 = styled.h2`
   padding-bottom: 0.3rem;
   border-bottom: 2px solid black;
   margin-bottom: 1rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
 `;
 
 const StCommentP = styled.p`
   font-size: 1.3rem;
   padding: 0.5rem;
   background-color: rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const StCommentFirstLineDiv = styled.div`

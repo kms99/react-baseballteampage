@@ -15,16 +15,22 @@ const Main = ({ selectTeam, setSelectTeam }) => {
     (comments) => comments.team === initTeams[selectTeam].text
   );
   let currentTeamComments = (
-    <ul>
-      {filteredComments.map((filteredComments) => {
-        return (
-          <MainCard
-            key={filteredComments.id}
-            filteredComments={filteredComments}
-          />
-        );
-      })}
-    </ul>
+    <>
+      <h2>
+        {initTeams[selectTeam].text}팀에 총 ({filteredComments.length})개의
+        코멘트가 있습니다.
+      </h2>
+      <ul>
+        {filteredComments.map((filteredComments) => {
+          return (
+            <MainCard
+              key={filteredComments.id}
+              filteredComments={filteredComments}
+            />
+          );
+        })}
+      </ul>
+    </>
   );
   useEffect(() => {
     console.log(allComment);
@@ -45,13 +51,7 @@ const Main = ({ selectTeam, setSelectTeam }) => {
         onGetCommentHandler={getCommentHandler}
       />
 
-      <StCommentDiv selected={selectTeam}>
-        <h2>
-          {initTeams[selectTeam].text}팀에 총 ({filteredComments.length})개의
-          코멘트가 있습니다.
-        </h2>
-        {currentTeamComments}
-      </StCommentDiv>
+      <StCommentDiv selected={selectTeam}>{currentTeamComments}</StCommentDiv>
     </StMain>
   );
 };

@@ -16,6 +16,14 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
   // form 입력 값 저장 state
   const [inputData, setInputData] = useState(initInputData);
 
+  const lengthCheck = (checkValue, length) => {
+    if (checkValue.length > length) {
+      alert(`최대 ${length} 글자까지 작성할 수 있습니다.`);
+      return false;
+    }
+    return true;
+  };
+
   // 팀변경시 input 값 초기화
   useEffect(() => {
     setInputData(initInputData);
@@ -26,14 +34,19 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
     e.preventDefault();
 
     // Validation Check
-    if (!inputData.user) {
-      alert("닉네임을 입력하세요.");
-      return;
-    }
-    if (!inputData.comment) {
-      alert("내용을 입력하세요.");
-      return;
-    }
+    // if (!inputData.user) {
+    //   alert("닉네임을 입력하세요.");
+    //   return;
+    // }else if (inputData.user.length>20){
+
+    // }
+
+    // if (!inputData.comment) {
+    //   alert("내용을 입력하세요.");
+    //   return;
+    // }else if (inputData.user.length>100){
+
+    // }
 
     // 부모 컴포넌트에 건내줄 새로운 배열
     const newComment = {
@@ -65,11 +78,17 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
 
   //   MainFormInput을 동적생성하기 위한 배열
   const inputSection = [
-    { key: "user", text: "닉네임", changeHandler: userInputChangeHandler },
+    {
+      key: "user",
+      text: "닉네임",
+      changeHandler: userInputChangeHandler,
+      maxWidth: 20,
+    },
     {
       key: "comment",
       text: "응원의 말",
       changeHandler: commentInputChangeHandler,
+      maxWidth: 100,
     },
   ];
 
@@ -81,6 +100,7 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
         section={section}
         teamCommentValue={inputData[section.key]}
         selected={selectTeam}
+        maxWidth={section.maxWidth}
       />
     );
   });
