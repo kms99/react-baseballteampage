@@ -1,10 +1,9 @@
-import "./App.css";
 import react, { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
-import { initTeams } from "./commonData";
 import { styled, ThemeProvider } from "styled-components";
 import GlobalStyle from "./GlobalStyle";
+import GlobalFont from "./style/fonts";
 import theme from "./theme";
 
 const StWrapper = styled.div`
@@ -13,7 +12,10 @@ const StWrapper = styled.div`
   min-width: 80rem;
   margin: auto;
   background: rgba(0, 0, 0, 0.9);
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
+  padding-bottom: 1rem;
+  font-family: "NotoSansKR";
 `;
 function App() {
   const [selectTeam, setSelectTeam] = useState(0);
@@ -24,6 +26,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <GlobalFont />
       <StWrapper>
         <Header selectTeam={selectTeam} onSelectTeams={setSelectTeam} />
         <Main selectTeam={selectTeam} setSelectTeam={setSelectTeam} />

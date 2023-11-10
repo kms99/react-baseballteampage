@@ -4,7 +4,7 @@ import { initTeams } from "../../commonData";
 
 const StTitle = styled.h1`
   font-size: 4rem;
-  font-family: "Black Han Sans", sans-serif;
+  font-family: "BlackHanSans", sans-serif;
   color: ${(props) => props.theme.subColor[initTeams[props.selected].team]};
   transition: all 0.5s;
 `;

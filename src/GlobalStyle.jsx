@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-    
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -22,13 +22,14 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    box-sizing:border-box;
 }
 html{
 	font-size: 62.5%;
-	height: 100%;
+	height: auto;
 }
 
-input,div{
+input,div,ul,li,h3{
     box-sizing:border-box;
 }
 /* HTML5 display-role reset for older browsers */
@@ -37,12 +38,30 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	position: relative;
 	line-height: 1;
-	height: 100%;
-	background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Jamsil_Baseball_Stadium_panorama_%28April_28_2017%29.jpg/1200px-Jamsil_Baseball_Stadium_panorama_%28April_28_2017%29.jpg');
+	/* height: auto; */
+}
+
+#root::before {
+	content: "";
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100vh;
+	width: 100vw;
+	/* z-index:-1; */
+	background: url('image/background.jpg');
 	background-position: center;
 	background-size: cover;
 }
+
+html::-webkit-scrollbar{
+	width: 0;
+
+}
+
+
 ol, ul {
 	list-style: none;
 }

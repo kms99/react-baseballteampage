@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { initTeams } from "../../commonData";
 import MainForm from "./MainForm";
 import styled from "styled-components";
+import MainCard from "./MainCard";
 
 const Main = ({ selectTeam, setSelectTeam }) => {
   const [allComment, setAllComment] = useState([]);
@@ -17,14 +18,10 @@ const Main = ({ selectTeam, setSelectTeam }) => {
     <ul>
       {filteredComments.map((filteredComments) => {
         return (
-          <li key={filteredComments.id}>
-            <div>
-              <div>{filteredComments.team}</div>
-              <h3>{filteredComments.user}</h3>
-              <p>{filteredComments.comment}</p>
-              <div>{filteredComments.date.getFullYear()}</div>
-            </div>
-          </li>
+          <MainCard
+            key={filteredComments.id}
+            filteredComments={filteredComments}
+          />
         );
       })}
     </ul>
@@ -35,7 +32,9 @@ const Main = ({ selectTeam, setSelectTeam }) => {
 
   if (filteredComments.length === 0)
     currentTeamComments = (
-      <div>등록된 응원 글이 없습니다. 지금 바로 작성해보세요.</div>
+      <StValidationMessageDiv>
+        등록된 응원 글이 없습니다.
+      </StValidationMessageDiv>
     );
 
   return (
@@ -46,10 +45,13 @@ const Main = ({ selectTeam, setSelectTeam }) => {
         onGetCommentHandler={getCommentHandler}
       />
 
-      <div>
-        <h2>{initTeams[selectTeam].text}</h2>
+      <StCommentDiv>
+        <h2>
+          {initTeams[selectTeam].text}팀에 총 ({filteredComments.length})개의
+          코멘트가 있습니다.
+        </h2>
         {currentTeamComments}
-      </div>
+      </StCommentDiv>
     </StMain>
   );
 };
@@ -60,6 +62,28 @@ const StMain = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const StCommentDiv = styled.div`
+  width: 50rem;
+  background-color: #ffffff83;
+  color: black;
+  border-radius: 15px;
+  padding: 1rem;
+  margin-top: 1rem;
+  & > h2 {
+    margin: 1rem 0 2rem 0;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+`;
+const StValidationMessageDiv = styled.div`
+  font-size: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  color: #ad053a;
+  font-weight: bold;
 `;
 
 export default Main;
