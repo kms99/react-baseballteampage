@@ -5,13 +5,15 @@ import styled from "styled-components";
 import HeaderButton from "./HeaderButton";
 
 const StHeader = styled.header`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 3rem;
-  background: ${(props) =>
-    props.theme.mainColor[initTeams[props.selected].team]};
-  transition: all 0.5s;
+  background: linear-gradient(
+    ${(props) => props.theme.mainColor[initTeams[props.selected].team]},
+    #000
+  );
 `;
 
 const StButtonDiv = styled.div`

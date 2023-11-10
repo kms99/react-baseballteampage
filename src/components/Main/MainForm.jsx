@@ -4,6 +4,7 @@ import { initTeams } from "../../commonData";
 import MainFormButton from "./MainFormButton";
 import MainFormTeamSelectBox from "./MainFormTeamSelectBox";
 import { v4 as uuidv4 } from "uuid";
+import styled from "styled-components";
 
 // form 입력 부분 최초값
 const initInputData = {
@@ -67,15 +68,40 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
   });
 
   return (
-    <form onSubmit={teamCommentSubmitHandler}>
-      <MainFormTeamSelectBox
-        selectTeam={selectTeam}
-        setSelectTeam={setSelectTeam}
-      />
-      {formInputMapping}
+    <StForm selected={selectTeam} onSubmit={teamCommentSubmitHandler}>
+      <StImageDiv selected={selectTeam}></StImageDiv>
+      <div>
+        <MainFormTeamSelectBox
+          selectTeam={selectTeam}
+          setSelectTeam={setSelectTeam}
+        />
+        {formInputMapping}
+      </div>
       <MainFormButton>입력</MainFormButton>
-    </form>
+    </StForm>
   );
 };
 
+const StForm = styled.form`
+  border: 5px solid
+    ${(props) => props.theme.mainColor[initTeams[props.selected].team]};
+  border-radius: 20px;
+  width: 50rem;
+  height: 35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+  background: ${(props) =>
+    props.theme.subColor[initTeams[props.selected].team]};
+`;
+
+const StImageDiv = styled.div`
+  width: 10rem;
+  height: 10rem;
+  background: url(${(props) => initTeams[props.selected].logo});
+  background-size: contain;
+  background-repeat: no-repeat;
+`;
 export default MainForm;

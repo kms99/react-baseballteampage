@@ -22,10 +22,14 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-    box-sizing:border-box;
 }
 html{
 	font-size: 62.5%;
+	height: 100%;
+}
+
+input,div{
+    box-sizing:border-box;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -34,6 +38,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	height: 100%;
+	background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Jamsil_Baseball_Stadium_panorama_%28April_28_2017%29.jpg/1200px-Jamsil_Baseball_Stadium_panorama_%28April_28_2017%29.jpg');
+	background-position: center;
+	background-size: cover;
 }
 ol, ul {
 	list-style: none;

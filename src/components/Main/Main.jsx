@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { initTeams } from "../../commonData";
 import MainForm from "./MainForm";
+import styled from "styled-components";
 
 const Main = ({ selectTeam, setSelectTeam }) => {
   const [allComment, setAllComment] = useState([]);
@@ -38,7 +39,7 @@ const Main = ({ selectTeam, setSelectTeam }) => {
     );
 
   return (
-    <div>
+    <StMain>
       <MainForm
         selectTeam={selectTeam}
         setSelectTeam={setSelectTeam}
@@ -49,8 +50,16 @@ const Main = ({ selectTeam, setSelectTeam }) => {
         <h2>{initTeams[selectTeam].text}</h2>
         {currentTeamComments}
       </div>
-    </div>
+    </StMain>
   );
 };
+
+const StMain = styled.main`
+  color: white;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default Main;

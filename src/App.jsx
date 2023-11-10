@@ -7,6 +7,14 @@ import { styled, ThemeProvider } from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import theme from "./theme";
 
+const StWrapper = styled.div`
+  position: relative;
+  max-width: 120rem;
+  min-width: 80rem;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.9);
+  height: 100vh;
+`;
 function App() {
   const [selectTeam, setSelectTeam] = useState(0);
 
@@ -16,8 +24,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Header selectTeam={selectTeam} onSelectTeams={setSelectTeam} />
-      <Main selectTeam={selectTeam} setSelectTeam={setSelectTeam} />
+      <StWrapper>
+        <Header selectTeam={selectTeam} onSelectTeams={setSelectTeam} />
+        <Main selectTeam={selectTeam} setSelectTeam={setSelectTeam} />
+      </StWrapper>
     </ThemeProvider>
   );
 }
