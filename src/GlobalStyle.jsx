@@ -15,7 +15,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video,button {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -43,24 +43,11 @@ body {
 	/* height: auto; */
 }
 
-#root::before {
-	content: "";
-	position: fixed;
-	left: 0;
-	top: 0;
-	height: 100vh;
-	width: 100vw;
-	/* z-index:-1; */
-	background: url('image/background.jpg');
-	background-position: center;
-	background-size: cover;
-}
 
 html::-webkit-scrollbar{
 	width: 0;
 
 }
-
 
 ol, ul {
 	list-style: none;

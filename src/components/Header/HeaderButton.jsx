@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { initTeams } from "../../commonData";
+import { useNavigate } from "react-router-dom";
 
 const StBtn = styled.button`
   background: ${(props) =>
@@ -30,8 +31,10 @@ const StBtn = styled.button`
 `;
 
 const HeaderButton = ({ title, selectTeamHandler, value, selectTeam }) => {
+  const navigate = useNavigate();
   const teamButtonClickHandler = () => {
     selectTeamHandler(value);
+    navigate("/");
   };
   return (
     <StBtn onClick={teamButtonClickHandler} value={value} selected={selectTeam}>

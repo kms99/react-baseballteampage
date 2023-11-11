@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { initTeams } from "../../commonData";
+import React, { useState } from "react";
+import { initTeams } from "../../../commonData";
 import MainForm from "./MainForm";
 import styled from "styled-components";
 import MainCard from "./MainCard";
-import dummy from "../../db/data.json";
 
-const Main = ({ selectTeam, setSelectTeam }) => {
-  // console.log(dummy[0].date.getDate());
-  const [allComment, setAllComment] = useState(dummy);
-
+const Main = ({ selectTeam, setSelectTeam, allComment, setAllComment }) => {
   const getCommentHandler = (comment) => {
     setAllComment((prev) => [comment, ...prev]);
   };
@@ -23,11 +19,11 @@ const Main = ({ selectTeam, setSelectTeam }) => {
         코멘트가 있습니다.
       </h2>
       <ul>
-        {filteredComments.map((filteredComments) => {
+        {filteredComments.map((filteredComment) => {
           return (
             <MainCard
-              key={filteredComments.id}
-              filteredComments={filteredComments}
+              key={filteredComment.id}
+              filteredComment={filteredComment}
             />
           );
         })}

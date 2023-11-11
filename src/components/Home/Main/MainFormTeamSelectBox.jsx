@@ -1,5 +1,5 @@
 import React from "react";
-import { initTeams } from "../../commonData";
+import { initTeams } from "../../../commonData";
 import styled from "styled-components";
 
 const MainFormTeamSelectBox = ({ selectTeam, setSelectTeam }) => {

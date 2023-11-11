@@ -1,36 +1,26 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { dateFormat } from "../../../commonData";
 
-const MainCard = ({ filteredComments }) => {
-  const date = new Date(filteredComments.date);
-  const month = Math.floor((date.getMonth() + 1) / 10)
-    ? date.getMonth() + 1
-    : `0${date.getMonth() + 1}`;
-  const day = Math.floor(date.getDate() / 10)
-    ? date.getDate()
-    : `0${date.getDate()}`;
-  const hour = Math.floor(date.getHours() / 10)
-    ? date.getHours()
-    : `0${date.getHours()}`;
-  const minute = Math.floor(date.getMinutes() / 10)
-    ? date.getMinutes()
-    : `0${date.getMinutes()}`;
-  const second = Math.floor(date.getSeconds() / 10)
-    ? date.getSeconds()
-    : `0${date.getSeconds()}`;
+const MainCard = ({ filteredComment }) => {
+  const commentDate = dateFormat(filteredComment.date);
 
-  const commentDate = `${date.getFullYear()}/${month}/${day}  ${hour}:${minute}:${second}`;
+  const navigate = useNavigate();
+  const navigateToDetail = () => {
+    navigate(`detail/${filteredComment.id}`);
+  };
   return (
-    <StLi key={filteredComments.id}>
+    <StLi key={filteredComment.id} onClick={navigateToDetail}>
       <StDateDiv>{commentDate}</StDateDiv>
 
-      <StUserImg avatar={filteredComments.avatar}></StUserImg>
+      <StUserImg $img={filteredComment.avatar}></StUserImg>
       <StCommentFirstLineDiv>
-        <StTeamNameH3>{filteredComments.team}</StTeamNameH3>
-        <StUserNameH2>{filteredComments.user} 님</StUserNameH2>
+        <StTeamNameH3>{filteredComment.team}</StTeamNameH3>
+        <StUserNameH2>{filteredComment.user} 님</StUserNameH2>
       </StCommentFirstLineDiv>
 
-      <StCommentP>{filteredComments.comment}</StCommentP>
+      <StCommentP>{filteredComment.comment}</StCommentP>
     </StLi>
   );
 };
@@ -42,6 +32,11 @@ const StLi = styled.li`
   border-radius: 5px;
   padding: 1rem;
   position: relative;
+  transition: 0.5s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
+  }
 `;
 
 const StTeamNameH3 = styled.h3`
@@ -79,9 +74,9 @@ const StCommentFirstLineDiv = styled.div`
 `;
 
 const StUserImg = styled.div`
+  ${({ $img }) => ($img ? `background-image:url(${$img});` : "")}
   width: 4rem;
   height: 4rem;
-  background: url(${(props) => props.avatar});
   background-position: center;
   background-size: cover;
   border-radius: 50%;

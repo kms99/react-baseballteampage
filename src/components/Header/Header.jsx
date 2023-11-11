@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { initTeams } from "../../commonData";
 import HeaderTitle from "./HeaderTitle";
 import styled from "styled-components";
@@ -23,10 +23,13 @@ const StButtonDiv = styled.div`
   margin-top: 2rem;
 `;
 
-const Header = ({ selectTeam, onSelectTeams }) => {
+const Header = ({ children, selectTeam, setSelectTeam }) => {
   const selectTeamHandler = (value) => {
-    onSelectTeams(value);
+    setSelectTeam(value);
   };
+
+  // const [selectTeam, setSelectTeam] = useState(0);
+
   const teamButtons = (
     <StButtonDiv>
       {initTeams.map((team, index) => (
@@ -42,11 +45,13 @@ const Header = ({ selectTeam, onSelectTeams }) => {
   );
 
   return (
-    <StHeader selected={selectTeam}>
-      <HeaderTitle selectTeam={selectTeam} />
-
-      {teamButtons}
-    </StHeader>
+    <>
+      <StHeader selected={selectTeam}>
+        <HeaderTitle selectTeam={selectTeam} />
+        {teamButtons}
+      </StHeader>
+      {children}
+    </>
   );
 };
 

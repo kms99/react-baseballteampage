@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { initTeams } from "../../commonData";
+import { initTeams } from "../../../commonData";
 
 const MainFormInput = ({ section, teamCommentValue, selected, maxWidth }) => {
   return (

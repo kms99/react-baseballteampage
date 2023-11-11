@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MainFormInput from "./MainFormInput";
-import { initTeams } from "../../commonData";
+import { initTeams } from "../../../commonData";
 import MainFormButton from "./MainFormButton";
 import MainFormTeamSelectBox from "./MainFormTeamSelectBox";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import avata from "../../../image/avatar.png";
 
 // form 입력 부분 최초값
 const initInputData = {
@@ -39,7 +40,7 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
       team: initTeams[selectTeam].text,
       id: uuidv4(),
       date: new Date(),
-      avatar: "image/avatar.png",
+      avatar: avata,
     };
 
     // input 값 초기화
