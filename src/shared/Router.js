@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Detail from "../pages/Detail";
 import Header from "../components/Header/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { styled, ThemeProvider } from "styled-components";
 import GlobalStyle from "../GlobalStyle";
 import GlobalFont from "../style/fonts";
@@ -36,7 +36,14 @@ const StWrapper = styled.div`
 
 const Router = () => {
   const [selectTeam, setSelectTeam] = useState(0);
-  const [allComment, setAllComment] = useState(dummy);
+  const [allComment, setAllComment] = useState(
+    JSON.parse(localStorage.getItem("comments")) || dummy
+  );
+
+  useEffect(() => {
+    localStorage.setItem("comments", JSON.stringify(allComment));
+  }, [allComment]);
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
