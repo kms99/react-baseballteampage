@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { initTeams } from "../../../commonData";
 import styled from "styled-components";
+import { MainContext } from "../../../context/AppContext";
 
-const MainFormTeamSelectBox = ({ selectTeam, setSelectTeam }) => {
+const MainFormTeamSelectBox = () => {
+  const { setSelectTeam, selectTeam } = useContext(MainContext);
+
   const commentSelectTeamHandler = (e) => {
     setSelectTeam(e.target.value);
   };
@@ -25,6 +28,7 @@ const MainFormTeamSelectBox = ({ selectTeam, setSelectTeam }) => {
   );
 };
 
+// styled components
 const StSelect = styled.select`
   width: 100%;
   height: 3rem;

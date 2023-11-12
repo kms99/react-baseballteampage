@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { initTeams } from "../../../commonData";
+import { MainContext } from "../../../context/AppContext";
 
-const MainFormButton = ({ children, selected }) => {
+const MainFormButton = ({ children }) => {
+  const { selectTeam } = useContext(MainContext);
   return (
-    <StFormButton type="submit" selected={selected}>
+    <StFormButton type="submit" selected={selectTeam}>
       {children}
     </StFormButton>
   );
 };
 
+// styled components
 const StFormButton = styled.button`
   width: 100%;
   height: 3rem;

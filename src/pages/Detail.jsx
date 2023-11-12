@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import prevImg from "../image/prevBtn.svg";
 import DetailPageCard from "../components/Detail/DetailPageCard";
+import { MainContext, DetailContext } from "../context/AppContext";
 
-const Detail = ({ allComment, setAllComment }) => {
+const Detail = () => {
+  const { allComment } = useContext(MainContext);
   const params = useParams();
   const findData = allComment.find(
     (comment) => String(params.id) === String(comment.id)
@@ -19,7 +21,9 @@ const Detail = ({ allComment, setAllComment }) => {
             <span>홈으로</span>
           </Link>
         </StToHomeLink>
-        <DetailPageCard findData={findData} setAllComment={setAllComment} />
+        <DetailContext.Provider value={{ findData }}>
+          <DetailPageCard />
+        </DetailContext.Provider>
       </StDetailDiv>
     </div>
   );

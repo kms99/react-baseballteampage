@@ -5,6 +5,7 @@ const DetailPageCardButton = ({ buttonImg, buttonEventHandler }) => {
   return <StBtn $img={buttonImg} onClick={buttonEventHandler}></StBtn>;
 };
 
+// styled components
 const StBtn = styled.button`
   background: url(${(props) => props.$img});
   background-size: cover;

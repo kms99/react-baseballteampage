@@ -3,17 +3,16 @@ import styled from "styled-components";
 import DetailPageCardUser from "./DetailPageCardUser";
 import DetailPageCardCommentContainer from "./DetailPageCardCommentContainer";
 
-const DetailPageCard = ({ findData, setAllComment }) => {
+const DetailPageCard = () => {
   return (
     <StInfoDiv>
-      <DetailPageCardUser findData={findData} />
-      <DetailPageCardCommentContainer
-        findData={findData}
-        setAllComment={setAllComment}
-      />
+      <DetailPageCardUser />
+      <DetailPageCardCommentContainer />
     </StInfoDiv>
   );
 };
+
+// styled components
 const StInfoDiv = styled.div`
   width: 80%;
   height: 100%;

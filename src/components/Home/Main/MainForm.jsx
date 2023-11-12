@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MainFormInput from "./MainFormInput";
 import { initTeams } from "../../../commonData";
 import MainFormButton from "./MainFormButton";
@@ -6,6 +6,7 @@ import MainFormTeamSelectBox from "./MainFormTeamSelectBox";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import avata from "../../../image/avatar.png";
+import { MainContext } from "../../../context/AppContext";
 
 // form 입력 부분 최초값
 const initInputData = {
@@ -13,17 +14,12 @@ const initInputData = {
   comment: "",
 };
 
-const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
-  // form 입력 값 저장 state
-  const [inputData, setInputData] = useState(initInputData);
+const MainForm = () => {
+  const { selectTeam, setAllComment } = useContext(MainContext);
 
-  const lengthCheck = (checkValue, length) => {
-    if (checkValue.length > length) {
-      alert(`최대 ${length} 글자까지 작성할 수 있습니다.`);
-      return false;
-    }
-    return true;
-  };
+  // form 입력 값 저장 state
+  // 해당 State는 다른 곳에서 사용되는 것이 아닌, 직계 자식 컴포넌트에서만 사용되기 때문에 Context화 하지 않았음.
+  const [inputData, setInputData] = useState(initInputData);
 
   // 팀변경시 input 값 초기화
   useEffect(() => {
@@ -46,7 +42,7 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
     // input 값 초기화
     setInputData(initInputData);
     // 부모 컴포넌트의 함수를 이용한 값 전달
-    onGetCommentHandler(newComment);
+    setAllComment((prev) => [newComment, ...prev]);
   };
 
   //   input value state 저장 하기 위한 changeEventHandler
@@ -86,7 +82,6 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
         key={section.key}
         section={section}
         teamCommentValue={inputData[section.key]}
-        selected={selectTeam}
         maxWidth={section.maxWidth}
       />
     );
@@ -96,18 +91,15 @@ const MainForm = ({ selectTeam, setSelectTeam, onGetCommentHandler }) => {
     <StForm selected={selectTeam} onSubmit={teamCommentSubmitHandler}>
       <StImageDiv selected={selectTeam}></StImageDiv>
       <div>
-        <MainFormTeamSelectBox
-          selectTeam={selectTeam}
-          setSelectTeam={setSelectTeam}
-        />
+        <MainFormTeamSelectBox />
         {formInputMapping}
-
-        <MainFormButton selected={selectTeam}>작성하기</MainFormButton>
+        <MainFormButton>작성하기</MainFormButton>
       </div>
     </StForm>
   );
 };
 
+// styled components
 const StForm = styled.form`
   border: 5px solid
     ${(props) => props.theme.mainColor[initTeams[props.selected].team]};

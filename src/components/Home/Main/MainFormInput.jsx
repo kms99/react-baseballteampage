@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { initTeams } from "../../../commonData";
+import { MainContext } from "../../../context/AppContext";
 
-const MainFormInput = ({ section, teamCommentValue, selected, maxWidth }) => {
+const MainFormInput = ({ section, teamCommentValue, maxWidth }) => {
+  const { selectTeam } = useContext(MainContext);
   return (
     <StDiv>
-      <StLabel selected={selected}>{section.text}</StLabel>
+      <StLabel selected={selectTeam}>{section.text}</StLabel>
       <StInput
         value={teamCommentValue}
         onChange={section.changeHandler}
         placeholder={`최대 ${maxWidth}글자까지 작성할 수 있습니다.`}
-        maxLength={maxWidth} //til
+        maxLength={maxWidth}
         required
       />
     </StDiv>
   );
 };
 
+// styled components
 const StInput = styled.input`
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
