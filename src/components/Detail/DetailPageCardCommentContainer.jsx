@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { dateFormat } from "../../commonData";
 import modifyImg from "../../image/modify.svg";
@@ -6,10 +6,13 @@ import deleteImg from "../../image/delete.svg";
 import DetailPageCardButton from "./DetailPageCardButton";
 import { useNavigate } from "react-router-dom";
 import DetailPageCommentModifyBtn from "./DetailPageCommentModifyBtn";
+import { MainContext, DetailContext } from "../../context/AppContext";
 
-const DetailPageCardCommentContainer = ({ findData, setAllComment }) => {
+const DetailPageCardCommentContainer = () => {
+  const { setAllComment } = useContext(MainContext);
+  const { findData } = useContext(DetailContext);
+
   const formatDate = dateFormat(findData.date);
-
   const [modifyMode, setModifyMode] = useState(false);
   const [modifyValue, setModifyValue] = useState(findData.comment);
 
@@ -94,6 +97,7 @@ const DetailPageCardCommentContainer = ({ findData, setAllComment }) => {
   );
 };
 
+// styled components
 const StUserCommentContainer = styled.div`
   position: relative;
   width: 100%;

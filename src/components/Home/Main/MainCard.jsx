@@ -25,6 +25,7 @@ const MainCard = ({ filteredComment }) => {
   );
 };
 
+// styled components
 const StLi = styled.li`
   width: 100%;
   margin-bottom: 1rem;

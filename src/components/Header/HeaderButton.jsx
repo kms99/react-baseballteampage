@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { initTeams } from "../../commonData";
 import { useNavigate } from "react-router-dom";
+import { MainContext } from "../../context/AppContext";
 
+const HeaderButton = ({ title, value }) => {
+  const { setSelectTeam, selectTeam } = useContext(MainContext);
+  const navigate = useNavigate();
+  const teamButtonClickHandler = () => {
+    setSelectTeam(value);
+    navigate("/");
+  };
+  return (
+    <StBtn onClick={teamButtonClickHandler} value={value} selected={selectTeam}>
+      {title}
+    </StBtn>
+  );
+};
+
+//styled components
 const StBtn = styled.button`
   background: ${(props) =>
     props.value === props.selected
@@ -29,18 +45,4 @@ const StBtn = styled.button`
     color: ${(props) => props.theme.subColor[initTeams[props.value].team]};
   }
 `;
-
-const HeaderButton = ({ title, selectTeamHandler, value, selectTeam }) => {
-  const navigate = useNavigate();
-  const teamButtonClickHandler = () => {
-    selectTeamHandler(value);
-    navigate("/");
-  };
-  return (
-    <StBtn onClick={teamButtonClickHandler} value={value} selected={selectTeam}>
-      {title}
-    </StBtn>
-  );
-};
-
 export default HeaderButton;

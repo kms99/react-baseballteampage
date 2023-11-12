@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { initTeams } from "../../../commonData";
 import MainForm from "./MainForm";
 import styled from "styled-components";
 import MainCard from "./MainCard";
+import { MainContext } from "../../../context/AppContext";
 
-const Main = ({ selectTeam, setSelectTeam, allComment, setAllComment }) => {
-  const getCommentHandler = (comment) => {
-    setAllComment((prev) => [comment, ...prev]);
-  };
+const Main = () => {
+  const { selectTeam, allComment } = useContext(MainContext);
 
   const filteredComments = allComment.filter(
     (comments) => comments.team === initTeams[selectTeam].text
@@ -40,17 +39,13 @@ const Main = ({ selectTeam, setSelectTeam, allComment, setAllComment }) => {
 
   return (
     <StMain>
-      <MainForm
-        selectTeam={selectTeam}
-        setSelectTeam={setSelectTeam}
-        onGetCommentHandler={getCommentHandler}
-      />
-
+      <MainForm />
       <StCommentDiv selected={selectTeam}>{currentTeamComments}</StCommentDiv>
     </StMain>
   );
 };
 
+// styled components
 const StMain = styled.main`
   color: white;
   padding-top: 2rem;

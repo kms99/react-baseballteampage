@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import { initTeams } from "../../commonData";
 import HeaderTitle from "./HeaderTitle";
 import styled from "styled-components";
 import HeaderButton from "./HeaderButton";
+import { MainContext } from "../../context/AppContext";
 
+const Header = ({ children }) => {
+  const { selectTeam } = useContext(MainContext);
+
+  // Team Button 생성
+  const teamButtons = (
+    <StButtonDiv>
+      {initTeams.map((team, index) => (
+        <HeaderButton key={team.team} title={team.text} value={index} />
+      ))}
+    </StButtonDiv>
+  );
+
+  return (
+    <>
+      <StHeader selected={selectTeam}>
+        <HeaderTitle />
+        {teamButtons}
+      </StHeader>
+      {children}
+    </>
+  );
+};
+
+// Styled Component
 const StHeader = styled.header`
   position: relative;
   display: flex;
@@ -22,37 +47,4 @@ const StButtonDiv = styled.div`
   flex-wrap: wrap;
   margin-top: 2rem;
 `;
-
-const Header = ({ children, selectTeam, setSelectTeam }) => {
-  const selectTeamHandler = (value) => {
-    setSelectTeam(value);
-  };
-
-  // const [selectTeam, setSelectTeam] = useState(0);
-
-  const teamButtons = (
-    <StButtonDiv>
-      {initTeams.map((team, index) => (
-        <HeaderButton
-          key={team.team}
-          selectTeam={selectTeam}
-          title={team.text}
-          selectTeamHandler={selectTeamHandler}
-          value={index}
-        />
-      ))}
-    </StButtonDiv>
-  );
-
-  return (
-    <>
-      <StHeader selected={selectTeam}>
-        <HeaderTitle selectTeam={selectTeam} />
-        {teamButtons}
-      </StHeader>
-      {children}
-    </>
-  );
-};
-
 export default Header;

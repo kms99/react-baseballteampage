@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { DetailContext } from "../../context/AppContext";
 
-const DetailPageCardUser = ({ findData }) => {
+const DetailPageCardUser = () => {
+  const { findData } = useContext(DetailContext);
   return (
     <StUser>
       <StUserImg $img={findData.avatar}></StUserImg>
@@ -10,6 +12,8 @@ const DetailPageCardUser = ({ findData }) => {
     </StUser>
   );
 };
+
+// styled components
 const StUser = styled.div`
   display: flex;
   flex-direction: column;

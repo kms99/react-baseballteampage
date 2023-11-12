@@ -1,20 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { initTeams } from "../../commonData";
 import { useNavigate } from "react-router-dom";
+import { MainContext } from "../../context/AppContext";
 
-const StTitle = styled.h1`
-  font-size: 4rem;
-  font-family: "BlackHanSans", sans-serif;
-  color: ${(props) => props.theme.subColor[initTeams[props.selected].team]};
-  transition: all 0.5s;
-  cursor: pointer;
-`;
-const HeaderTitle = ({ selectTeam }) => {
+const HeaderTitle = () => {
   const navigate = useNavigate();
+  const { selectTeam } = useContext(MainContext);
+
   const goToHomeHandler = () => {
     navigate("/");
   };
+
   return (
     <StTitle selected={selectTeam} onClick={goToHomeHandler}>
       프로야구 TALK
@@ -22,4 +19,12 @@ const HeaderTitle = ({ selectTeam }) => {
   );
 };
 
+//styled components
+const StTitle = styled.h1`
+  font-size: 4rem;
+  font-family: "BlackHanSans", sans-serif;
+  color: ${(props) => props.theme.subColor[initTeams[props.selected].team]};
+  transition: all 0.5s;
+  cursor: pointer;
+`;
 export default HeaderTitle;
