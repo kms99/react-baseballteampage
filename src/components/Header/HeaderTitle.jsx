@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { initTeams } from "../../commonData";
 import { useNavigate } from "react-router-dom";
-import { MainContext } from "../../context/AppContext";
+import { useSelector } from "react-redux";
 
 const HeaderTitle = () => {
   const navigate = useNavigate();
-  const { selectTeam } = useContext(MainContext);
+  const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
 
   const goToHomeHandler = () => {
     navigate("/");

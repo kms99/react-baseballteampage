@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { initTeams } from "../../commonData";
 import { useNavigate } from "react-router-dom";
-import { MainContext } from "../../context/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setTeam } from "../../redux/modules/team";
 
 const HeaderButton = ({ title, value }) => {
-  const { setSelectTeam, selectTeam } = useContext(MainContext);
+  const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const teamButtonClickHandler = () => {
-    setSelectTeam(value);
+    dispatch(setTeam(value));
     navigate("/");
   };
   return (

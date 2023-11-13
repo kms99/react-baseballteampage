@@ -7,36 +7,22 @@ import { styled, ThemeProvider } from "styled-components";
 import GlobalStyle from "../GlobalStyle";
 import GlobalFont from "../style/fonts";
 import theme from "../theme";
-import dummy from "../db/data.json";
 import background from "../image/background.jpg";
-import { MainContext } from "../context/AppContext";
+import { useSelector } from "react-redux";
 
 const Router = () => {
-  const [selectTeam, setSelectTeam] = useState(0);
-  const [allComment, setAllComment] = useState(
-    JSON.parse(localStorage.getItem("comments")) || dummy
-  );
-
-  useEffect(() => {
-    localStorage.setItem("comments", JSON.stringify(allComment));
-  }, [allComment]);
-
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <GlobalFont />
         <StWrapper>
-          <MainContext.Provider
-            value={{ selectTeam, setSelectTeam, allComment, setAllComment }}
-          >
-            <Header>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="detail/:id" element={<Detail />} />
-              </Routes>
-            </Header>
-          </MainContext.Provider>
+          <Header>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="detail/:id" element={<Detail />} />
+            </Routes>
+          </Header>
         </StWrapper>
       </ThemeProvider>
     </BrowserRouter>

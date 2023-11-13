@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MainFormInput from "./MainFormInput";
 import { initTeams } from "../../../commonData";
 import MainFormButton from "./MainFormButton";
@@ -6,7 +6,8 @@ import MainFormTeamSelectBox from "./MainFormTeamSelectBox";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import avata from "../../../image/avatar.png";
-import { MainContext } from "../../../context/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { addComment } from "../../../redux/modules/comment";
 
 // form 입력 부분 최초값
 const initInputData = {
@@ -15,11 +16,12 @@ const initInputData = {
 };
 
 const MainForm = () => {
-  const { selectTeam, setAllComment } = useContext(MainContext);
+  const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
 
   // form 입력 값 저장 state
   // 해당 State는 다른 곳에서 사용되는 것이 아닌, 직계 자식 컴포넌트에서만 사용되기 때문에 Context화 하지 않았음.
   const [inputData, setInputData] = useState(initInputData);
+  const dispatch = useDispatch();
 
   // 팀변경시 input 값 초기화
   useEffect(() => {
@@ -42,7 +44,7 @@ const MainForm = () => {
     // input 값 초기화
     setInputData(initInputData);
     // 부모 컴포넌트의 함수를 이용한 값 전달
-    setAllComment((prev) => [newComment, ...prev]);
+    dispatch(addComment(newComment));
   };
 
   //   input value state 저장 하기 위한 changeEventHandler

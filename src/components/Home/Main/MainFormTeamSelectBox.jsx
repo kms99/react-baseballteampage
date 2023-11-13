@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { initTeams } from "../../../commonData";
 import styled from "styled-components";
-import { MainContext } from "../../../context/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setTeam } from "../../../redux/modules/team";
 
 const MainFormTeamSelectBox = () => {
-  const { setSelectTeam, selectTeam } = useContext(MainContext);
+  const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
+  const dispatch = useDispatch();
 
   const commentSelectTeamHandler = (e) => {
-    setSelectTeam(e.target.value);
+    dispatch(setTeam(e.target.value));
   };
 
   const teamOption = initTeams.map((team, index) => {

@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { DetailContext } from "../../context/AppContext";
+import { useSelector } from "react-redux";
 
 const DetailPageCardUser = () => {
-  const { findData } = useContext(DetailContext);
+  const findData = useSelector(({ comment }) => comment.findData);
   return (
     <StUser>
       <StUserImg $img={findData.avatar}></StUserImg>

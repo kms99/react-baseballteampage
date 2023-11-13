@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import { initTeams } from "../../../commonData";
 import MainForm from "./MainForm";
 import styled from "styled-components";
 import MainCard from "./MainCard";
-import { MainContext } from "../../../context/AppContext";
+import { useSelector } from "react-redux";
 
 const Main = () => {
-  const { selectTeam, allComment } = useContext(MainContext);
-
+  const allComment = useSelector(({ comment }) => comment.comments);
+  const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
+  useEffect(() => {
+    localStorage.setItem("comments", JSON.stringify(allComment));
+  }, [allComment]);
   const filteredComments = allComment.filter(
     (comments) => comments.team === initTeams[selectTeam].text
   );

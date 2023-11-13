@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { initTeams } from "../../../commonData";
-import { MainContext } from "../../../context/AppContext";
+import { useSelector } from "react-redux";
 
 const MainFormButton = ({ children }) => {
-  const { selectTeam } = useContext(MainContext);
+  const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
+
   return (
     <StFormButton type="submit" selected={selectTeam}>
       {children}

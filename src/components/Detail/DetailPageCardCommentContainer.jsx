@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { dateFormat } from "../../commonData";
 import modifyImg from "../../image/modify.svg";
@@ -6,16 +6,20 @@ import deleteImg from "../../image/delete.svg";
 import DetailPageCardButton from "./DetailPageCardButton";
 import { useNavigate } from "react-router-dom";
 import DetailPageCommentModifyBtn from "./DetailPageCommentModifyBtn";
-import { MainContext, DetailContext } from "../../context/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteComment, modifyComment } from "../../redux/modules/comment";
 
 const DetailPageCardCommentContainer = () => {
-  const { setAllComment } = useContext(MainContext);
-  const { findData } = useContext(DetailContext);
-
-  const formatDate = dateFormat(findData.date);
+  const findData = useSelector(({ comment }) => comment.findData);
   const [modifyMode, setModifyMode] = useState(false);
   const [modifyValue, setModifyValue] = useState(findData.comment);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const formatDate = dateFormat(findData.date);
+  const comment = useSelector(({ comment }) => comment.comments);
+  useEffect(() => {
+    localStorage.setItem("comments", JSON.stringify(comment));
+  }, [comment]);
   const changeModifyModeHandler = () => {
     setModifyMode((prev) => {
       if (prev) {
@@ -36,26 +40,14 @@ const DetailPageCardCommentContainer = () => {
       alert("변경된 내용이 없습니다.");
       return;
     }
-    setAllComment((prev) => {
-      const newArray = prev.map((comment) => {
-        if (comment.id === findData.id) {
-          return { ...comment, comment: modifyValue };
-        }
-        return comment;
-      });
-      return newArray;
-    });
+    dispatch(modifyComment(modifyValue));
+
     setModifyMode(false);
   };
 
-  const navigate = useNavigate();
-
   const deleteCommentHandler = () => {
     if (window.confirm("정말로 삭제하시겠습니까?")) {
-      setAllComment((prev) => {
-        const newArray = prev.filter((comment) => comment.id !== findData.id);
-        return newArray;
-      });
+      dispatch(deleteComment());
       navigate("/");
     }
   };

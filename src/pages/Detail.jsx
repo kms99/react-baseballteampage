@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import prevImg from "../image/prevBtn.svg";
 import DetailPageCard from "../components/Detail/DetailPageCard";
-import { MainContext, DetailContext } from "../context/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentCommentData } from "../redux/modules/comment";
 
 const Detail = () => {
-  const { allComment } = useContext(MainContext);
   const params = useParams();
-  const findData = allComment.find(
-    (comment) => String(params.id) === String(comment.id)
-  );
+  const dispatch = useDispatch();
+  dispatch(setCurrentCommentData(params.id));
 
   return (
     <div>
@@ -21,9 +20,7 @@ const Detail = () => {
             <span>홈으로</span>
           </Link>
         </StToHomeLink>
-        <DetailContext.Provider value={{ findData }}>
-          <DetailPageCard />
-        </DetailContext.Provider>
+        <DetailPageCard />
       </StDetailDiv>
     </div>
   );

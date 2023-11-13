@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { initTeams } from "../../../commonData";
-import { MainContext } from "../../../context/AppContext";
+import { useSelector } from "react-redux";
 
 const MainFormInput = ({ section, teamCommentValue, maxWidth }) => {
-  const { selectTeam } = useContext(MainContext);
+  const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
   return (
     <StDiv>
       <StLabel selected={selectTeam}>{section.text}</StLabel>

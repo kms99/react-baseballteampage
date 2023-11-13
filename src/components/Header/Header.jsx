@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { initTeams } from "../../commonData";
 import HeaderTitle from "./HeaderTitle";
 import styled from "styled-components";
 import HeaderButton from "./HeaderButton";
-import { MainContext } from "../../context/AppContext";
+import { useSelector } from "react-redux";
 
 const Header = ({ children }) => {
-  const { selectTeam } = useContext(MainContext);
-
+  const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
   // Team Button 생성
   const teamButtons = (
     <StButtonDiv>
