@@ -9,7 +9,7 @@ const MainFormTeamSelectBox = () => {
   const dispatch = useDispatch();
 
   const commentSelectTeamHandler = (e) => {
-    dispatch(setTeam(e.target.value));
+    dispatch(setTeam(parseInt(e.target.value)));
   };
 
   const teamOption = initTeams.map((team, index) => {

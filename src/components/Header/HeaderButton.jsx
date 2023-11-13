@@ -7,7 +7,6 @@ import { setTeam } from "../../redux/modules/team";
 
 const HeaderButton = ({ title, value }) => {
   const selectTeam = useSelector(({ team }) => team.currentTeamIndex);
-
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
