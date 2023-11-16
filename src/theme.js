@@ -25,5 +25,4 @@ const subColor = {
   kiwoom: "#FFFFFF",
 };
 
-const theme = { mainColor, subColor };
-export default theme;
+export const theme = { mainColor, subColor };

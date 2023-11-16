@@ -5,7 +5,7 @@ import Header from "../components/Header/Header";
 import { styled, ThemeProvider } from "styled-components";
 import GlobalStyle from "../GlobalStyle";
 import GlobalFont from "../style/fonts";
-import theme from "../theme";
+import { theme } from "../theme";
 import background from "../image/background.jpg";
 
 const Router = () => {
